@@ -34,7 +34,7 @@ export const useGetToken = (authCode, authState) => {
                 if (response.status < 300) {
                     const tokenResult = await response.json();
                     console.log("get result new token", tokenResult)
-                    store.save("token", {token: tokenResult.access_token})
+                    store.save("token", {token: tokenResult.access_token, refresh: tokenResult.refresh_token})
                     setResp(tokenResult.access_token)
                 }
                 // console.log("response", resp);

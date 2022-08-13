@@ -27,7 +27,7 @@ export default class Discover extends Component {
 
     return (
       <div className="discover">
-        <a href={loginUrl} target="_blank">Login </a> <br/>
+        <a href={loginUrl} >Login </a> <br/>
         <NavLink
             to="token"
           >

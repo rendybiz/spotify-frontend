@@ -7,21 +7,21 @@ const Callback = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   let navigate = useNavigate();
 
-  const code = searchParams.get("code");
-  const state = searchParams.get("state");
-
   useEffect(() => {
-    // console.log("search Params", {code, state})
+    const code = searchParams.get("code");
+    const state = searchParams.get("state");
+    console.log("search Params", {code, state})
+
     if (code && state) {
       store.save("auth", { code, state })
     }
     setTimeout(() => {
-      return navigate("/")
+      return window.location.replace("/")
     }, 500)
-  }, searchParams)
+  },[])
 
   return (<>
-    Callback</>
+    Please wait for redirection</>
   );
 }
 

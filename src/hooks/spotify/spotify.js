@@ -33,6 +33,18 @@ const Spotify = {
         return {
             url : redirectUrl+queryString
         }
-    }
+    },
+
+    // getToken:(code) =>{
+    //     const url = "https://accounts.spotify.com/api/token"
+    //     const params = {
+    //         code: code,
+    //         redirect_uri: 'http://localhost:3000/token-callback',
+    //         grant_type: 'authorization_code'
+    //       }
+    //     const headers = {
+    //         Authorization
+    //     }
+    // }
 }
 export default Spotify

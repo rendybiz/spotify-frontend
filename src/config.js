@@ -1,5 +1,4 @@
-console.log("check Process .env", process.env)
-export default {
+const config = {
   api: {
     baseUrl: 'https://api.spotify.com/v1',
     authUrl: 'https://accounts.spotify.com/api/token',
@@ -8,3 +7,5 @@ export default {
     scopes : 'user-read-private user-read-email'
   }
 }
+
+export default config;

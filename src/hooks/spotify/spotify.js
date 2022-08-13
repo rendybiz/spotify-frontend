@@ -13,10 +13,11 @@
 import config from "../../config";
 import randomString from "../../utils/randomString";
 
+const OUR_HOST = process.env.OUR_HOST || "http://localhost:3000"
 const Spotify = {
     authentication: () => {
         let client_id = config.api.clientId;
-        let redirect_uri = 'http://localhost:3000/callback';
+        let redirect_uri = OUR_HOST + '/callback';
 
         let state = randomString(16);
         let scope = 'user-read-private user-read-email';
@@ -31,7 +32,7 @@ const Spotify = {
         const queryString = new URLSearchParams(params).toString();
         let redirectUrl = 'https://accounts.spotify.com/authorize?'
         return {
-            url : redirectUrl+queryString
+            url: redirectUrl + queryString
         }
     },
 

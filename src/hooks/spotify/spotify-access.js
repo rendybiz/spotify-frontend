@@ -11,93 +11,104 @@
  */
 
 import { useState, useEffect } from "react";
-const API_HOST = "https://api.spotify.com"
-const setTokenHeader = (token)=>{
+import logout from "../../utils/logout";
+const API_HOST = process.env.SPOTIFY_API_HOST || "https://api.spotify.com"
+const setTokenHeader = (token) => {
     return {
-        'Authorization': "Bearer "+token, 
+        'Authorization': "Bearer " + token,
         'Accept': 'application/json'
     }
 }
 export const useGetNewRelease = (token) => {
-    const [resp, setResp] = useState({loading:true, data:null})
+    const [resp, setResp] = useState({ loading: true, data: null })
     const params = {
         country: "ID",
-        limit:"10",
-        offset:0
+        limit: "10",
+        offset: 0
     }
     const queryString = new URLSearchParams(params).toString();
 
     useEffect(() => {
         if (token) {
-            let redirectUrl = API_HOST+'/v1/browse/new-releases?' + queryString
+            let redirectUrl = API_HOST + '/v1/browse/new-releases?' + queryString
             fetch(redirectUrl, {
                 headers: setTokenHeader(token)
             }).then(async (response) => {
-                if (response.status < 300) {                   
-                    setResp( {loading:false, data:(await response.json()).albums.items})
+                if (response.status === 200 || response.status === 201) {
+                    setResp({ loading: false, data: (await response.json()).albums.items })
                 }
-                // console.log("response", resp);
+                if (response.status === 400 || response.status === 401) {
+                    logout()
+                }
+
             }).catch((e) => {
-                console.log("error", e)
+                setResp({ loading: false, data: null, error: "unknown error, please try again later" })
+
             })
         }
-    }, [])
+    }, [queryString, token])
 
     return resp;
 }
 export const useGetFeaturePlaylist = (token) => {
-    const [resp, setResp] = useState({loading:true, data:null})
+    const [resp, setResp] = useState({ loading: true, data: null })
     const params = {
         country: "ID",
-        limit:"10",
-        offset:0
+        limit: "10",
+        offset: 0
     }
     const queryString = new URLSearchParams(params).toString();
 
     useEffect(() => {
         if (token) {
-            let redirectUrl = API_HOST+'/v1/browse/featured-playlists?' + queryString
+            let redirectUrl = API_HOST + '/v1/browse/featured-playlists?' + queryString
             fetch(redirectUrl, {
                 headers: setTokenHeader(token)
             }).then(async (response) => {
-                if (response.status < 300) {                   
-                    setResp( {loading:false, data:(await response.json()).playlists.items})
+                if (response.status === 200 || response.status === 201) {
+                    setResp({ loading: false, data: (await response.json()).playlists.items })
                 }
-                // console.log("response", resp);
+                if (response.status === 400 || response.status === 401) {
+                    logout()
+                }
             }).catch((e) => {
-                console.log("error", e)
+                setResp({ loading: false, data: null, error: "unknown error, please try again later" })
+
             })
         }
-    }, [])
+    }, [queryString, token])
 
     return resp;
 }
 export const useGetCategories = (token) => {
-    const [resp, setResp] = useState({loading:true, data:null})
+    const [resp, setResp] = useState({ loading: true, data: null })
     const params = {
         country: "ID",
-        limit:"10",
-        offset:0
+        limit: "10",
+        offset: 0
     }
     const queryString = new URLSearchParams(params).toString();
 
     useEffect(() => {
         if (token) {
-            let redirectUrl = API_HOST+'/v1/browse/categories?' + queryString
+            let redirectUrl = API_HOST + '/v1/browse/categories?' + queryString
             fetch(redirectUrl, {
                 headers: setTokenHeader(token)
             }).then(async (response) => {
-                if (response.status < 300) {    
+                if (response.status === 200 || response.status === 201) {
                     const rsp = await response.json();
-                    console.log("Hello response", rsp)               
-                    setResp( {loading:false, data:(rsp.categories.items)})
+
+                    setResp({ loading: false, data: (rsp.categories.items) })
                 }
-                // console.log("response", resp);
+                if (response.status === 400 || response.status === 401) {
+                    logout()
+                }
             }).catch((e) => {
-                console.log("error", e)
+                setResp({ loading: false, data: null, error: "unknown error, please try again later" })
+
             })
         }
-    }, [])
+    }, [queryString, token])
 
     return resp;
 }

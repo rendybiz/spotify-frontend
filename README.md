@@ -1,9 +1,18 @@
 # Spootify Coding Challenge 🎧 &nbsp; ![hard](https://img.shields.io/badge/-Hard-red) ![time](https://img.shields.io/badge/%E2%8F%B0-60m-blue) 
 
+## Author 
+Rendy Adi Saputra
+### Dependency
+To run this App you need the Express JS backend  [https://github.com/rendybiz/spotify-backend](https://github.com/rendybiz/spotify-backend).
+
+### Why we need to use ExpressJS-BE?
+Because, To get the token from Spotify, we need CLIENT ID and CLIENT SECRET requirements to get token is . It's not safe to call the CLIENT SECRET from the browser. So use Express JS to call Spotify REST API from the backend side, and get the token.
+
 &nbsp;
 # Goals/Outcomes ✨
 - To test knowledge of consuming APIs and handling responses
 - Loading state and knowing where and how to make multiple API calls efficiently
+
 
 &nbsp;
 # Pre-requisites ✅

@@ -1,24 +1,32 @@
 /**
- * Task 
- * Fetch and display Released This Week songs
- * Use the API path new-releases
- * Fetch and display Featured Playlists
- * Use the API path featured-playlists
- * Fetch and display Browse genres
- * Use the API path categories
- * Loading state/UI (optional, current UX is already clean)
- *
+ * The hooks functions of Spotify Access
+ * target : 
+ * - Get New Release
+ * - Get Featured List
+ * - Get Categories
  */
 
 import { useState, useEffect } from "react";
 import logout from "../../utils/logout";
+
 const API_HOST = process.env.SPOTIFY_API_HOST || "https://api.spotify.com"
+/**
+ * set Headers that need token inside 
+ * we need this to call API from Spotify API
+ * @param {String} token 
+ * @returns {Object} Headers Object
+ */
 const setTokenHeader = (token) => {
     return {
         'Authorization': "Bearer " + token,
         'Accept': 'application/json'
     }
 }
+/**
+ * Call REST API to get Spotify New Release
+ * @param {String} token String
+ * @returns {Object} null | {loading, data}
+ */
 export const useGetNewRelease = (token) => {
     const [resp, setResp] = useState({ loading: true, data: null })
     const params = {
@@ -50,6 +58,11 @@ export const useGetNewRelease = (token) => {
 
     return resp;
 }
+/**
+ * Call REST API to get Spotify Featured playlist
+ * @param {String} token String
+ * @returns {Object} null | {loading, data}
+ */
 export const useGetFeaturePlaylist = (token) => {
     const [resp, setResp] = useState({ loading: true, data: null })
     const params = {
@@ -80,6 +93,11 @@ export const useGetFeaturePlaylist = (token) => {
 
     return resp;
 }
+/**
+ * Call REST API to get Spotify Featured playlist
+ * @param {String} token String
+ * @returns {Object} null | {loading, data}
+ */
 export const useGetCategories = (token) => {
     const [resp, setResp] = useState({ loading: true, data: null })
     const params = {

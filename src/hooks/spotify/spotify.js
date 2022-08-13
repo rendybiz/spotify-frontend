@@ -1,12 +1,5 @@
 /**
- * Task 
- * Fetch and display Released This Week songs
- * Use the API path new-releases
- * Fetch and display Featured Playlists
- * Use the API path featured-playlists
- * Fetch and display Browse genres
- * Use the API path categories
- * Loading state/UI (optional, current UX is already clean)
+ * The Functions below is to handle some public consumsion for users
  *
  */
 
@@ -15,6 +8,11 @@ import randomString from "../../utils/randomString";
 
 const OUR_HOST = process.env.OUR_HOST || "http://localhost:3000"
 const Spotify = {
+    /**
+     * The Authentication to Spotify Login Url, it used 
+     * for redirecting page to Spotify Login site Page
+     * @returns Object {url: <url_link>}
+     */
     authentication: () => {
         let client_id = config.api.clientId;
         let redirect_uri = OUR_HOST + '/callback';
@@ -35,17 +33,5 @@ const Spotify = {
             url: redirectUrl + queryString
         }
     },
-
-    // getToken:(code) =>{
-    //     const url = "https://accounts.spotify.com/api/token"
-    //     const params = {
-    //         code: code,
-    //         redirect_uri: 'http://localhost:3000/token-callback',
-    //         grant_type: 'authorization_code'
-    //       }
-    //     const headers = {
-    //         Authorization
-    //     }
-    // }
 }
 export default Spotify

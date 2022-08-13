@@ -1,6 +1,7 @@
 /**
- * This hook will call REST API for our Express JS
- *
+ * This hook will call REST API from our Express JS
+ * The Default express JS is run in 3001, you can replace it from 
+ * Your .env EXPRESS_HOST
  */
 
 import { useState, useEffect } from "react";
@@ -10,6 +11,12 @@ import store from "../../store/store";
 
 const EXPRESS_HOST = process.env.EXPRESS_HOST || 'http://localhost:3001';
 
+/**
+ * 
+ * @param {String} authCode 
+ * @param {String} authState 
+ * @returns {Object} null | {token, refresh} // Token and Refresh Token
+ */
 export const useGetToken = (authCode, authState) => {
     const [resp, setResp] = useState(null)
     const params = {
